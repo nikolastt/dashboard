@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 
+interface ITitleContainerProps {
+  lineColor: string
+}
+
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   
 `;
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled.div<ITitleContainerProps>`
   
 
   &::after{
     content: '';
     display: block;
     width: 55px;
-    border-bottom: 10px solid ${props => props.theme.colors.warning};
+    border-bottom: 10px solid ${props => props.lineColor};
     transition: ease-in-out 0.5s;
   }
 `;
@@ -26,6 +30,6 @@ export const Title = styled.h1`
 `;
 
 export const Controllers = styled.div`
-  
+  display: flex;
 `;
 
