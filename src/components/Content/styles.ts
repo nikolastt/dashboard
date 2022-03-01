@@ -4,5 +4,6 @@ export const Container = styled.div`
 color: ${props => props.theme.colors.white};
   grid-area: Content;
   transition: ease-in-out 0.5s;
-  background-color: ${props => props.theme.colors.primary}
+  background-color: ${props => props.theme.colors.primary};
+  padding: 1.5rem;
 `;

@@ -26,6 +26,7 @@ export const LogoImg = styled.img`
 export const Title = styled.h3`
     margin-left: 0.5rem;
     color: ${props => props.theme.colors.white};
+    transition: ease-in-out 0.5s;
 
 `
 
@@ -42,7 +43,8 @@ export const LinkItem = styled.a`
     text-decoration: none;
     color: ${props => props.theme.colors.info};
     transition: ease-in-out 0.3s;
-    margin-left: 0.5rem;    
+    margin-left: 0.5rem;   
+    transition: ease-in-out 0.5s; 
 
     span{
         margin-left: 0.3rem;

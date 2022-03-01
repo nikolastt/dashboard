@@ -14,6 +14,7 @@ export const Container = styled.div`
 
 export const Profile = styled.div`
   color: ${props => props.theme.colors.white};
+  transition: ease-in-out 0.5s;
 `
 export const Welcome = styled.h3``
 export const UserName = styled.span``

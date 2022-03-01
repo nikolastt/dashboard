@@ -1,4 +1,5 @@
 import React from "react";
+import Dashboard from "../../pages/Dashboard";
 import Aside from "../Aside";
 import Content from "../Content";
 import MainHeader from "../MainHeader";
@@ -14,7 +15,9 @@ const Layout: React.FC<Props> = ({ handleTheme }) => {
     <Container>
       <MainHeader handleTheme={handleTheme} />
       <Aside />
-      <Content />
+      <Content>
+        <Dashboard />
+      </Content>
     </Container>
   );
 };
