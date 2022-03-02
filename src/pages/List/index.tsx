@@ -9,6 +9,8 @@ import { Container, Content, Filters } from "./styles";
 
 import expenses from "../../Repositories/expenses";
 import gains from "../../Repositories/gains";
+import formatCurrency from "../../utils/formatCurrency";
+import formatDate from "../../utils/formatDate";
 
 const month = [
   { value: 1, label: "janeiro" },
@@ -68,8 +70,8 @@ const List: React.FC = () => {
             <HistoryFinanceCard
               key={Math.random() * data.length}
               title={item.description}
-              date={item.date}
-              amount={item.amount}
+              date={formatDate(item.date)}
+              amount={formatCurrency(Number(item.amount))}
               tagColor={item.frequency === "recorrente" ? "#4E41F0" : "#E44C4E"}
             />
           );
