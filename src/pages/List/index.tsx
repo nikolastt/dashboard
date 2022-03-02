@@ -1,5 +1,4 @@
-import React, { useContext, useMemo } from "react";
-import { ThemeContext } from "styled-components";
+import React, { useMemo, useState } from "react";
 import HeadContent from "../../components/ContentHeader";
 import HistoryFinanceCard from "../../components/HistoryFinanceCard";
 import SelectInput from "../../components/SelectInput";
@@ -8,18 +7,27 @@ import { useParams } from "react-router-dom";
 
 import { Container, Content, Filters } from "./styles";
 
-const options = [
-  { value: "maca", label: "maca" },
-  { value: "banana", label: "banana" },
+import expenses from "../../Repositories/expenses";
+import gains from "../../Repositories/gains";
+
+const month = [
+  { value: 1, label: "janeiro" },
+  { value: 2, label: "fevereiro" },
 ];
-const nomes = [
-  { value: "lucas", label: "lucas" },
-  { value: "manuel", label: "manuel" },
+const year = [
+  { value: "2021", label: "2021" },
+  { value: "2022", label: "2022" },
 ];
+
+interface IData {
+  description: string;
+  amount: string;
+  type: string;
+  frequency: string;
+  date: string;
+}
 
 const List: React.FC = () => {
-  const theme = useContext(ThemeContext);
-
   const { type } = useParams();
 
   const getParams = useMemo(() => {
@@ -27,18 +35,22 @@ const List: React.FC = () => {
       ? {
           title: "Entradas",
           lineColor: "#F7931B",
+          typeFile: gains,
         }
       : {
           title: "Saídas",
           lineColor: "#E44C4E",
+          typeFile: expenses,
         };
   }, [type]);
+
+  const [data, setData] = useState<IData[]>(getParams.typeFile);
 
   return (
     <Container>
       <HeadContent title={getParams.title} lineColor={getParams.lineColor}>
-        <SelectInput options={options} />
-        <SelectInput options={nomes} />
+        <SelectInput options={month} />
+        <SelectInput options={year} />
       </HeadContent>
 
       <Filters>
@@ -51,60 +63,17 @@ const List: React.FC = () => {
       </Filters>
 
       <Content>
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          tagColor="#e44c4e"
-        />
+        {data.map((item) => {
+          return (
+            <HistoryFinanceCard
+              key={Math.random() * data.length}
+              title={item.description}
+              date={item.date}
+              amount={item.amount}
+              tagColor={item.frequency === "recorrente" ? "#4E41F0" : "#E44C4E"}
+            />
+          );
+        })}
       </Content>
     </Container>
   );

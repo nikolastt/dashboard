@@ -4,7 +4,7 @@ import { Container } from "./styles";
 
 interface ISelectInputProps {
   options: {
-    value: string;
+    value: string | number;
     label: string;
   }[];
 }
