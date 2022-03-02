@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import Layout from "./components/Layout";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import dark from "./styles/themes/dark";
 import light from "./styles/themes/light";
-
-// import { Container } from './styles';
+import AppRoutes from "./routes";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState(dark);
@@ -15,7 +13,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Layout handleTheme={handleTheme} />
+      <AppRoutes handleTheme={handleTheme} />
     </ThemeProvider>
   );
 };
