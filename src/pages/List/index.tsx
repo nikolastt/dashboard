@@ -4,7 +4,7 @@ import HeadContent from "../../components/ContentHeader";
 import HistoryFinanceCard from "../../components/HistoryFinanceCard";
 import SelectInput from "../../components/SelectInput";
 
-import { Container, Content } from "./styles";
+import { Container, Content, Filters } from "./styles";
 
 const options = [
   { value: "maca", label: "maca" },
@@ -17,6 +17,7 @@ const nomes = [
 
 const List: React.FC = () => {
   const theme = useContext(ThemeContext);
+
   return (
     <Container>
       <HeadContent title="Saídas" lineColor={theme.colors.warning}>
@@ -24,117 +25,68 @@ const List: React.FC = () => {
         <SelectInput options={nomes} />
       </HeadContent>
 
+      <Filters>
+        <button className="tag-filter-eventual" type="button">
+          Eventuais
+        </button>
+        <button className="tag-filter-recurrent" type="button">
+          Recorrentes
+        </button>
+      </Filters>
+
       <Content>
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
         <HistoryFinanceCard
           title="Conta de Luz"
           date="02/03/2022"
           amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
-          tagColor="#e44c4e"
-        />
-        <HistoryFinanceCard
-          title="Conta de Luz"
-          date="02/03/2022"
-          amount="R$ 130,00"
-          cardColor="#313862"
           tagColor="#e44c4e"
         />
       </Content>

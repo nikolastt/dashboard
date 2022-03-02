@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 
-interface ICardColorProps {
-    cardColor: string;
-}
 
 interface ITagColorProps {
    tagColor: string;
 }
 
-export const Container = styled.li<ICardColorProps>`
+export const Container = styled.li`
 
     display: flex;
     justify-content: space-between;
     transition: ease-in-out 0.2s;    
-    background-color: ${props => props.cardColor};
+    background-color: ${props => props.theme.colors.tertiary};
     padding: 0.5rem;
     border-radius: 0.5rem;
     align-items: center;
