@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import HeadContent from "../../components/ContentHeader";
 import HistoryFinanceCard from "../../components/HistoryFinanceCard";
 import SelectInput from "../../components/SelectInput";
@@ -7,17 +7,17 @@ import { useParams } from "react-router-dom";
 
 import { Container, Content, Filters } from "./styles";
 
-import expenses from "../../Repositories/expenses";
 import gains from "../../Repositories/gains";
 import formatCurrency from "../../utils/formatCurrency";
 import formatDate from "../../utils/formatDate";
+import expenses from "../../Repositories/expenses";
 
 const month = [
-  { value: 1, label: "janeiro" },
-  { value: 2, label: "fevereiro" },
+  { value: 6, label: "junho" },
+  { value: 7, label: "julho" },
 ];
 const year = [
-  { value: "2021", label: "2021" },
+  { value: "2020", label: "2020" },
   { value: "2022", label: "2022" },
 ];
 
@@ -31,6 +31,13 @@ interface IData {
 
 const List: React.FC = () => {
   const { type } = useParams();
+
+  const [monthSelected, setMonthSelected] = useState<string>(
+    String(new Date().getMonth() + 1)
+  );
+  const [yearSelected, setYearSelected] = useState<string>(
+    String(new Date().getFullYear())
+  );
 
   const getParams = useMemo(() => {
     return type === "entry"
@@ -46,13 +53,41 @@ const List: React.FC = () => {
         };
   }, [type]);
 
-  const [data, setData] = useState<IData[]>(getParams.typeFile);
+  function handleMonth(month: string) {
+    setMonthSelected(month);
+  }
+
+  function handleYear(month: string) {
+    setYearSelected(month);
+  }
+
+  const [data, setData] = useState<IData[]>([]);
+
+  useEffect(() => {
+    const filteredData = getParams.typeFile.filter((item) => {
+      const date = new Date(item.date);
+      const month = String(date.getMonth());
+      const year = String(date.getFullYear());
+
+      return year === yearSelected && month === monthSelected;
+    });
+
+    setData(filteredData);
+  }, [yearSelected, getParams.typeFile]);
 
   return (
     <Container>
       <HeadContent title={getParams.title} lineColor={getParams.lineColor}>
-        <SelectInput options={month} />
-        <SelectInput options={year} />
+        <SelectInput
+          options={month}
+          defaultValue={monthSelected}
+          handleSelected={handleMonth}
+        />
+        <SelectInput
+          handleSelected={handleYear}
+          options={year}
+          defaultValue={yearSelected}
+        />
       </HeadContent>
 
       <Filters>

@@ -20,8 +20,8 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <HeadContent title="Dashboard" lineColor={theme.colors.info}>
-        <SelectInput options={options} />
-        <SelectInput options={nomes} />
+        <SelectInput handleSelected={() => {}} options={options} />
+        <SelectInput handleSelected={() => {}} options={nomes} />
       </HeadContent>
       <h1>Content Dashboard</h1>
     </Container>
