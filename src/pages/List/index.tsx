@@ -1,17 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Container, Content, Filters } from "./styles";
 import HeadContent from "../../components/ContentHeader";
 import HistoryFinanceCard from "../../components/HistoryFinanceCard";
 import SelectInput from "../../components/SelectInput";
-
 import ListOfMonths from "../../utils/months";
-
-import { useParams } from "react-router-dom";
-
-import { Container, Content, Filters } from "./styles";
-
-import gains from "../../Repositories/gains";
 import formatCurrency from "../../utils/formatCurrency";
 import formatDate from "../../utils/formatDate";
+import gains from "../../Repositories/gains";
 import expenses from "../../Repositories/expenses";
 
 interface IData {
@@ -69,29 +65,6 @@ const List: React.FC = () => {
     });
   }, [getParams.typeFile]);
 
-  // const months = useMemo(() => {
-  //   let uniqueMonth: string[] = [];
-
-  //   getParams.typeFile.forEach((item) => {
-  //     const date = new Date(item.date);
-  //     const year = String(date.getFullYear());
-  //     const month = String(date.getMonth() + 1);
-
-  //     if (!uniqueMonth.includes(month) && yearSelected === year) {
-  //       uniqueMonth.push(month);
-  //     }
-  //   });
-
-  //   return uniqueMonth.map((month) => {
-  //     const listOfMonths: string[] = ListOfMonths;
-
-  //     return {
-  //       value: Number(month) - 1,
-  //       label: listOfMonths[Number(month) - 1],
-  //     };
-  //   });
-  // }, [getParams.typeFile, yearSelected]);
-
   function handleMonth(month: string) {
     setMonthSelected(month);
   }
@@ -106,8 +79,6 @@ const List: React.FC = () => {
     } else {
       setFrequency(["recorrente", "eventual"]);
     }
-
-    console.log(frequency);
   }
 
   function handleBtnRecurrent() {
@@ -116,7 +87,6 @@ const List: React.FC = () => {
     } else {
       setFrequency(["recorrente", "eventual"]);
     }
-    console.log(frequency);
   }
 
   useEffect(() => {
@@ -131,8 +101,6 @@ const List: React.FC = () => {
         frequency.includes(item.frequency)
       );
     });
-
-    console.log(filteredData);
 
     setData(filteredData);
   }, [yearSelected, getParams.typeFile, monthSelected, frequency]);
