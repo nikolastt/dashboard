@@ -6,7 +6,8 @@ import ListOfMonths from "../../utils/months";
 import gains from "../../Repositories/gains";
 import expenses from "../../Repositories/expenses";
 
-import { Container } from "./styles";
+import { Container, Content } from "./styles";
+import WalletBox from "../../components/WalletBox";
 
 const Dashboard: React.FC = () => {
   const theme = useContext(ThemeContext);
@@ -60,7 +61,32 @@ const Dashboard: React.FC = () => {
           defaultValue={yearSelected}
         />
       </HeadContent>
-      <h1>Content Dashboard</h1>
+
+      <Content>
+        <WalletBox
+          title="Saldo"
+          amount={150}
+          subtitle="Atualizado com base nas entradas e saídas"
+          color="#4E41F0"
+          icon="dolar"
+        />
+
+        <WalletBox
+          title="Entradas"
+          amount={5000}
+          subtitle="Atualizado com base nas entradas e saídas"
+          color="#F7931B"
+          icon="arrowUp"
+        />
+
+        <WalletBox
+          title="Saídas"
+          amount={4850}
+          subtitle="Atualizado com base nas entradas e saídas"
+          color="#E44C4e"
+          icon="arrowDown"
+        />
+      </Content>
     </Container>
   );
 };
