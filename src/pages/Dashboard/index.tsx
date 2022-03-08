@@ -8,6 +8,10 @@ import expenses from "../../Repositories/expenses";
 
 import { Container, Content } from "./styles";
 import WalletBox from "../../components/WalletBox";
+import MessageBox from "../../components/MessageBox";
+
+import happy from "../../assets/happy.svg";
+import sad from "../../assets/sad.svg";
 
 const Dashboard: React.FC = () => {
   const theme = useContext(ThemeContext);
@@ -87,6 +91,13 @@ const Dashboard: React.FC = () => {
           icon="arrowDown"
         />
       </Content>
+
+      <MessageBox
+        title="Muito Bem!"
+        icon={happy}
+        description="Sua carteira está positiva!"
+        footer="Continue assim. Considere investir o seu saldo!"
+      />
     </Container>
   );
 };
