@@ -12,7 +12,9 @@ import MessageBox from "../../components/MessageBox";
 
 import happy from "../../assets/happy.svg";
 import sad from "../../assets/sad.svg";
-import ufaa from "../../assets/Ufaa.svg";
+import grinning from "../../assets/grinning.svg";
+import PieChart from "../../components/PieChartBox";
+import PieChartBox from "../../components/PieChartBox";
 
 const Dashboard: React.FC = () => {
   const theme = useContext(ThemeContext);
@@ -84,12 +86,35 @@ const Dashboard: React.FC = () => {
     } else {
       return {
         title: "Ufaa!",
-        icon: ufaa,
+        icon: grinning,
         description: "Neste mes, você gastou exatamente o que ganhou!",
         footer: "Tenha cuidado para não ficar negativado.",
       };
     }
   }, [totalBalance]);
+
+  const relationsGainsVersusExpenses = useMemo(() => {
+    const total = totalGains + totalExpenses;
+    const percentGains = (totalGains / total) * 100;
+    const percentExpenses = (totalExpenses / total) * 100;
+
+    const data = [
+      {
+        name: "Entradas",
+        percent: percentGains.toFixed(0),
+        value: totalGains,
+        color: "#E44C4E",
+      },
+      {
+        name: "Saídas",
+        percent: percentExpenses.toFixed(0),
+        value: totalExpenses,
+        color: "#F7931B",
+      },
+    ];
+
+    return data;
+  }, [totalExpenses, totalGains]);
 
   function handleMonth(month: string) {
     setMonthSelected(month);
@@ -158,14 +183,15 @@ const Dashboard: React.FC = () => {
           color="#E44C4e"
           icon="arrowDown"
         />
-      </Content>
 
-      <MessageBox
-        title={dynamicMessageBox.title}
-        icon={dynamicMessageBox.icon}
-        description={dynamicMessageBox.description}
-        footer={dynamicMessageBox.footer}
-      />
+        <MessageBox
+          title={dynamicMessageBox.title}
+          icon={dynamicMessageBox.icon}
+          description={dynamicMessageBox.description}
+          footer={dynamicMessageBox.footer}
+        />
+        <PieChartBox data={relationsGainsVersusExpenses} />
+      </Content>
     </Container>
   );
 };
