@@ -15,6 +15,7 @@ import sad from "../../assets/sad.svg";
 import grinning from "../../assets/grinning.svg";
 import PieChart from "../../components/PieChartBox";
 import PieChartBox from "../../components/PieChartBox";
+import HistoryBox from "../../components/HistoryBox";
 
 const Dashboard: React.FC = () => {
   const theme = useContext(ThemeContext);
@@ -144,6 +145,53 @@ const Dashboard: React.FC = () => {
     });
   }, []);
 
+  const historyData = useMemo(() => {
+    return ListOfMonths.map((month) => {
+      let amountGains: string = "0";
+      gains.forEach((gain) => {
+        const monthGain = new Date(gain.date).getMonth();
+        const yearGain = new Date(gain.date).getFullYear();
+
+        if (monthGain === month.value && String(yearGain) === yearSelected) {
+          amountGains += gain.amount;
+        }
+      });
+
+      let amountExpenses: number = 0;
+      expenses.forEach((expense) => {
+        const monthExpense = new Date(expense.date).getMonth();
+        const yearExpense = new Date(expense.date).getFullYear();
+
+        if (
+          monthExpense === month.value &&
+          String(yearExpense) === yearSelected
+        ) {
+          console.log(expense.amount);
+          amountExpenses += Number(expense.amount);
+        }
+      });
+
+      // console.log(amountExpenses);
+
+      return {
+        name: month.label.substring(0, 3),
+        month: month.value,
+        Entradas: Number(amountGains),
+        Saídas: amountExpenses,
+      };
+    }).filter((item) => {
+      const month = new Date().getMonth() + 1;
+      const year = new Date().getFullYear();
+
+      console.log(month);
+
+      return (
+        (yearSelected === String(year) && item.month <= month) ||
+        yearSelected < String(year)
+      );
+    });
+  }, [yearSelected]);
+
   return (
     <Container>
       <HeadContent title="Dashboard" lineColor={theme.colors.info}>
@@ -190,7 +238,10 @@ const Dashboard: React.FC = () => {
           description={dynamicMessageBox.description}
           footer={dynamicMessageBox.footer}
         />
+
         <PieChartBox data={relationsGainsVersusExpenses} />
+
+        <HistoryBox data={historyData} />
       </Content>
     </Container>
   );

@@ -1,18 +1,3 @@
-// const month = [
-//     'Janeiro',
-//     'Fevereiro',
-//     'Março',
-//     'Abril',
-//     'Maio',
-//     'Junho',
-//     'Julho',
-//     'Agosto',
-//     'Setembro',
-//     'Outubro',
-//     'Novembro',
-//     'Desembro',
-// ]
-
 const month = [
     { value: 1, label: 'Janeiro'},
     { value: 2, label: 'Fevereiro'},

@@ -55,10 +55,6 @@ export const  Legend = styled.div`
 `;
 
 
-export const TitleLegend = styled.p`
-    margin-left: 0.5rem;
-`;
-
 
 export const BoxLegend = styled.div<IBoxLegendProps>`
     display: flex;
@@ -72,6 +68,9 @@ export const BoxLegend = styled.div<IBoxLegendProps>`
     font-weight: 500;
 `;
 
+export const TitleLegend = styled.p`
+    margin-left: 0.5rem;
+`;
 
 export const SideRight = styled.div`
 

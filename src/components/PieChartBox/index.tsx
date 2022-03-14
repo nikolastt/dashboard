@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import {
   Container,
@@ -23,32 +23,6 @@ interface IPieChartBoxProps {
 }
 
 const PieChartBox: React.FC<IPieChartBoxProps> = ({ data }) => {
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx = 1,
-    cy = 1,
-    midAngle = 1,
-    innerRadius = 1,
-    outerRadius = 1,
-    percent = 1,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 1).toFixed(0)}%`}
-      </text>
-    );
-  };
-
   return (
     <Container>
       <SideLeft>
@@ -56,8 +30,8 @@ const PieChartBox: React.FC<IPieChartBoxProps> = ({ data }) => {
         <LegendContainer>
           {data.map((item) => {
             return (
-              <Legend>
-                <BoxLegend color={item.color}>{item.percent}</BoxLegend>
+              <Legend key={item.name}>
+                <BoxLegend color={item.color}>{item.percent}%</BoxLegend>
                 <TitleLegend>{item.name}</TitleLegend>
               </Legend>
             );
