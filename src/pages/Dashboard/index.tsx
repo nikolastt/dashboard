@@ -16,6 +16,7 @@ import grinning from "../../assets/grinning.svg";
 import PieChart from "../../components/PieChartBox";
 import PieChartBox from "../../components/PieChartBox";
 import HistoryBox from "../../components/HistoryBox";
+import BarChartBox from "../../components/BarChartBox";
 
 const Dashboard: React.FC = () => {
   const theme = useContext(ThemeContext);
@@ -166,24 +167,19 @@ const Dashboard: React.FC = () => {
           monthExpense === month.value &&
           String(yearExpense) === yearSelected
         ) {
-          console.log(expense.amount);
           amountExpenses += Number(expense.amount);
         }
       });
 
-      // console.log(amountExpenses);
-
       return {
         name: month.label.substring(0, 3),
         month: month.value,
-        Entradas: Number(amountGains),
-        Saídas: amountExpenses,
+        amountGains: Number(amountGains),
+        amountExpenses: amountExpenses,
       };
     }).filter((item) => {
       const month = new Date().getMonth() + 1;
       const year = new Date().getFullYear();
-
-      console.log(month);
 
       return (
         (yearSelected === String(year) && item.month <= month) ||
@@ -191,6 +187,68 @@ const Dashboard: React.FC = () => {
       );
     });
   }, [yearSelected]);
+
+  const relationExpensesRecurrentVersusEventual = useMemo(() => {
+    let amountRecurrent = 0;
+    let amountEventual = 0;
+
+    expenses.map((expense) => {
+      const month = String(new Date(expense.date).getMonth() + 1);
+      const year = String(new Date(expense.date).getFullYear());
+
+      if (month === monthSelected && year === yearSelected) {
+        if (expense.frequency === "recorrente") {
+          amountRecurrent += Number(expense.amount);
+        } else {
+          amountEventual += Number(expense.amount);
+        }
+      }
+    });
+
+    return [
+      {
+        name: "Recorrentes",
+        amount: amountRecurrent,
+        color: "#F7931B",
+      },
+      {
+        name: "Eventuais",
+        amount: amountEventual,
+        color: "#E44c4E",
+      },
+    ];
+  }, [monthSelected, yearSelected]);
+
+  const relationGainsRecurrentVersusEventual = useMemo(() => {
+    let amountRecurrent = 0;
+    let amountEventual = 0;
+
+    gains.map((gain) => {
+      const month = String(new Date(gain.date).getMonth() + 1);
+      const year = String(new Date(gain.date).getFullYear());
+
+      if (month === monthSelected && year === yearSelected) {
+        if (gain.frequency === "recorrente") {
+          amountRecurrent += Number(gain.amount);
+        } else {
+          amountEventual += Number(gain.amount);
+        }
+      }
+    });
+
+    return [
+      {
+        name: "Recorrentes",
+        amount: amountRecurrent,
+        color: "#F7931B",
+      },
+      {
+        name: "Eventuais",
+        amount: amountEventual,
+        color: "#E44c4E",
+      },
+    ];
+  }, [monthSelected, yearSelected]);
 
   return (
     <Container>
@@ -242,6 +300,16 @@ const Dashboard: React.FC = () => {
         <PieChartBox data={relationsGainsVersusExpenses} />
 
         <HistoryBox data={historyData} />
+
+        <BarChartBox
+          title="Entradas"
+          data={relationGainsRecurrentVersusEventual}
+        />
+
+        <BarChartBox
+          title="Saídas"
+          data={relationExpensesRecurrentVersusEventual}
+        />
       </Content>
     </Container>
   );

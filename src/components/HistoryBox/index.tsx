@@ -17,8 +17,8 @@ import formatCurrency from "../../utils/formatCurrency";
 interface IHistoryBoxProps {
   data: {
     name: string;
-    Entradas: number;
-    Saídas: number;
+    amountGains: number;
+    amountExpenses: number;
   }[];
 }
 
@@ -51,14 +51,16 @@ const HistoryBox: React.FC<IHistoryBoxProps> = ({ data }) => {
             <Legend />
             <Line
               type="monotone"
-              dataKey="Entradas"
+              dataKey="amountGains"
+              name="Entradas"
               stroke="#82ca9d"
               dot={{ r: 4 }}
               activeDot={{ r: 8 }}
             />
             <Line
               type="monotone"
-              dataKey="Saídas"
+              dataKey="amountExpenses"
+              name="Saídas"
               stroke="#fa7f72"
               dot={{ r: 4 }}
               activeDot={{ r: 8 }}
