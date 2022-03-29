@@ -3,17 +3,21 @@ import Switch from "react-switch";
 import { Container, ToggleLabel } from "./styles";
 import { ThemeContext } from "styled-components";
 
-interface Props {
-  handleTheme(): void;
-}
+import { useDispatch } from "react-redux";
+import { changeTheme } from "../../redux/themeSlice";
 
-const Toggle: React.FC<Props> = ({ handleTheme }) => {
+import dark from "../../styles/themes/dark";
+import light from "../../styles/themes/light";
+
+const Toggle: React.FC = () => {
   const { colors } = useContext(ThemeContext);
   const [checked, setChecked] = useState(true);
 
+  const dispatch = useDispatch();
+
   const handleToggle = () => {
     setChecked(!checked);
-    handleTheme();
+    dispatch(changeTheme());
   };
 
   return (
@@ -31,6 +35,7 @@ const Toggle: React.FC<Props> = ({ handleTheme }) => {
         handleDiameter={15}
         offHandleColor={colors.white}
       />
+
       <ToggleLabel>Dark</ToggleLabel>
     </Container>
   );

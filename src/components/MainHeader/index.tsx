@@ -5,11 +5,7 @@ import { Container, Profile, Welcome, UserName } from "./styles";
 import ListEmojis from "../../utils/ListEmojis";
 import Toggle from "../Toggle";
 
-interface Props {
-  handleTheme(): void;
-}
-
-const MainHeader: React.FC<Props> = ({ handleTheme }) => {
+const MainHeader: React.FC = () => {
   const emoji = useMemo(() => {
     const indice = Math.floor(Math.random() * ListEmojis.length);
     return ListEmojis[indice];
@@ -17,7 +13,7 @@ const MainHeader: React.FC<Props> = ({ handleTheme }) => {
 
   return (
     <Container>
-      <Toggle handleTheme={handleTheme} />
+      <Toggle />
 
       <Profile>
         <Welcome>olá, {emoji}</Welcome>

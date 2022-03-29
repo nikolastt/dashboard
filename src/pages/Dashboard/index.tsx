@@ -105,13 +105,13 @@ const Dashboard: React.FC = () => {
         name: "Entradas",
         percent: percentGains.toFixed(0),
         value: totalGains,
-        color: "#E44C4E",
+        color: "#F7931B",
       },
       {
         name: "Saídas",
         percent: percentExpenses.toFixed(0),
         value: totalExpenses,
-        color: "#F7931B",
+        color: "#E44C4E",
       },
     ];
 
@@ -150,7 +150,7 @@ const Dashboard: React.FC = () => {
     return ListOfMonths.map((month) => {
       let amountGains: string = "0";
       gains.forEach((gain) => {
-        const monthGain = new Date(gain.date).getMonth();
+        const monthGain = new Date(gain.date).getMonth() + 1;
         const yearGain = new Date(gain.date).getFullYear();
 
         if (monthGain === month.value && String(yearGain) === yearSelected) {
@@ -160,7 +160,7 @@ const Dashboard: React.FC = () => {
 
       let amountExpenses: number = 0;
       expenses.forEach((expense) => {
-        const monthExpense = new Date(expense.date).getMonth();
+        const monthExpense = new Date(expense.date).getMonth() + 1;
         const yearExpense = new Date(expense.date).getFullYear();
 
         if (

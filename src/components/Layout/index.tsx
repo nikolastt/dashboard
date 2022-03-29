@@ -4,14 +4,10 @@ import Content from "../Content";
 import MainHeader from "../MainHeader";
 import { Container } from "./styles";
 
-interface Props {
-  handleTheme(): void;
-}
-
-const Layout: React.FC<Props> = ({ handleTheme, children }) => {
+const Layout: React.FC = ({ children }) => {
   return (
     <Container>
-      <MainHeader handleTheme={handleTheme} />
+      <MainHeader />
       <Aside />
       <Content>{children}</Content>
     </Container>

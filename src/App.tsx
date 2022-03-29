@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import GlobalStyles from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
-import dark from "./styles/themes/dark";
-import light from "./styles/themes/light";
+
 import AppRoutes from "./routes";
 
+import { RootState } from "./redux/store";
+import { useSelector } from "react-redux";
+
+import dark from "./styles/themes/dark";
+import light from "./styles/themes/light";
+
 const App: React.FC = () => {
-  const [theme, setTheme] = useState(dark);
-  const handleTheme = () => {
-    theme === dark ? setTheme(light) : setTheme(dark);
-  };
+  const themeDark = useSelector((state: RootState) => state.theme.dark);
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeDark ? dark : light}>
       <GlobalStyles />
-      <AppRoutes handleTheme={handleTheme} />
+      <AppRoutes />
     </ThemeProvider>
   );
 };

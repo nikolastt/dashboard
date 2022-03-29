@@ -5,14 +5,10 @@ import Layout from "../components/Layout";
 import Dashboard from "../pages/Dashboard";
 import List from "../pages/List";
 
-interface IAppRoutesProps {
-  handleTheme(): void;
-}
-
-const MyRoutes: React.FC<IAppRoutesProps> = ({ handleTheme }) => {
+const MyRoutes: React.FC = () => {
   return (
     <BrowserRouter>
-      <Layout handleTheme={handleTheme}>
+      <Layout>
         <Routes>
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/List/:type" element={<List />} />
