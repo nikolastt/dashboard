@@ -10,6 +10,7 @@ const MyRoutes: React.FC = () => {
     <BrowserRouter>
       <Layout>
         <Routes>
+          <Route path="/" element={<Dashboard />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/List/:type" element={<List />} />
         </Routes>

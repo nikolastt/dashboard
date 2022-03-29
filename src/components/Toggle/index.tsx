@@ -5,13 +5,13 @@ import { ThemeContext } from "styled-components";
 
 import { useDispatch } from "react-redux";
 import { changeTheme } from "../../redux/themeSlice";
-
-import dark from "../../styles/themes/dark";
-import light from "../../styles/themes/light";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Toggle: React.FC = () => {
+  const dark = useSelector((state: RootState) => state.theme.dark);
   const { colors } = useContext(ThemeContext);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(dark);
 
   const dispatch = useDispatch();
 
